@@ -1,0 +1,49 @@
+<aura:component controller="CustomContactAppController" implements="flexipage:availableForAllPageTypes" access="global">
+    <aura:attribute name="newContact" type="CustomContact__c" default="{
+        'sobjectType': 'CustomContact__c',
+        'Name': '',
+        'LastName__c': '',
+        'Email__c': '',
+        'Phone__c': '',
+        'Fax__c': ''
+    }" />
+    <aura:attribute name="savedContact" type="CustomContact__c" />
+    <aura:attribute name="errorMessage" type="String" default='' />
+
+    <lightning:card title="Create Custom Contact" iconName="standard:contact">
+        <!-- CREATE NEW CONTACT -->
+        <div class="slds-var-m-around_small">
+            <form class="slds-form_stacked">
+                <lightning:input type="text" aura:id="contactform" label="First Name" name="contactname"
+                    value="{! v.newContact.Name}" required="true" />
+
+                <lightning:input type="text" aura:id="contactform" label="Last Name" name="contactlastname"
+                    value="{! v.newContact.LastName__c}" required="true" />
+
+                <lightning:input type="email" aura:id="contactform" label="Email" name="contactemail"
+                    value="{! v.newContact.Email__c}" />
+
+                <lightning:input type="number" aura:id="contactform" label="Phone" name="contactphone"
+                    value="{! v.newContact.Phone__c}" />
+
+                <lightning:input type="number" aura:id="contactform" label="Fax" name="contactfax"
+                    value="{! v.newContact.Fax__c}" />
+
+                <lightning:button label="Create Contact" class="slds-m-top_medium" variant="brand"
+                    onclick="{! c.clickCreateContact }" />
+            </form>
+        </div>
+        <!-- / CREATE NEW CONTACT -->
+    </lightning:card>
+
+    <lightning:layout>
+        <lightning:layoutItem padding="around-small">
+            <aura:if isTrue="{! v.savedContact}">
+                <c:customContact contact="{!v.savedContact}" />
+                <aura:set attribute="else">
+                    <lightning:formattedText value="{! c.errorMessage}" />
+                </aura:set>
+            </aura:if>
+        </lightning:layoutItem>
+    </lightning:layout>
+</aura:component>

@@ -1,0 +1,21 @@
+<aura:component>
+    <aura:attribute name="contact" type="CustomContact__c" />
+    <lightning:card title="{! v.contact.Name}" iconName="standard:contact">
+        <p class="slds-p-horizontal_small">
+            <lightning:formattedName firstName="{! v.contact.Name}" lastName="{! v.contact.LastName__c}"
+                format="short" />
+        </p>
+        <p class="slds-p-horizontal_small">
+            Phone:
+            <lightning:formattedPhone value="{! v.contact.Phone__c}" />
+        </p>
+        <p class="slds-p-horizontal_small">
+            Fax:
+            <lightning:formattedPhone value="{! v.contact.Fax__c}" />
+        </p>
+        <p class="slds-p-horizontal_small" slot="footer">
+            Email:
+            <lightning:formattedEmail value="{! v.contact.Email__c}" hideIcon="true" />
+        </p>
+    </lightning:card>
+</aura:component>
